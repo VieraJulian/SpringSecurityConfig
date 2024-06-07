@@ -1,9 +1,9 @@
 package com.curso.springsecurity.repository;
 
-import com.curso.springsecurity.model.Permission;
+import com.curso.springsecurity.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IPermissionRepository extends JpaRepository<Permission, Long> {
+public interface IRoleRepository extends JpaRepository<Role, Long> {
 }
