@@ -1,5 +1,6 @@
 package com.curso.springsecurity.security.config;
 
+import com.curso.springsecurity.service.UserDetailsServiceImp;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -48,10 +49,10 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider() {
+    public AuthenticationProvider authenticationProvider(UserDetailsServiceImp userDetailsServiceImp) {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(passwordEncoder());
-        provider.setUserDetailsService(userDetailsService());
+        provider.setUserDetailsService(userDetailsServiceImp);
         return provider;
     }
 
@@ -60,28 +61,28 @@ public class SecurityConfig {
         return NoOpPasswordEncoder.getInstance();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        List userDetailsList = new ArrayList<>();
-
-        userDetailsList.add(User.withUsername("ADMIN")
-                                .password("1234")
-                                .roles("ADMIN")
-                                .authorities("READ", "CREATE", "UPDATE", "DELETE")
-                                .build());
-
-        userDetailsList.add(User.withUsername("INVITED")
-                .password("1234")
-                .roles("INVITED")
-                .authorities("READ")
-                .build());
-
-        userDetailsList.add(User.withUsername("USER")
-                .password("1234")
-                .roles("USER")
-                .authorities("UPDATE")
-                .build());
-
-        return new InMemoryUserDetailsManager(userDetailsList);
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        List userDetailsList = new ArrayList<>();
+//
+//        userDetailsList.add(User.withUsername("ADMIN")
+//                                .password("1234")
+//                                .roles("ADMIN")
+//                                .authorities("READ", "CREATE", "UPDATE", "DELETE")
+//                                .build());
+//
+//        userDetailsList.add(User.withUsername("INVITED")
+//                .password("1234")
+//                .roles("INVITED")
+//                .authorities("READ")
+//                .build());
+//
+//        userDetailsList.add(User.withUsername("USER")
+//                .password("1234")
+//                .roles("USER")
+//                .authorities("UPDATE")
+//                .build());
+//
+//        return new InMemoryUserDetailsManager(userDetailsList);
+//    }
 }
