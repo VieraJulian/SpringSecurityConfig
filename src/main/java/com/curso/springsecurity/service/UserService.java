@@ -3,6 +3,7 @@ package com.curso.springsecurity.service;
 import com.curso.springsecurity.model.UserEntity;
 import com.curso.springsecurity.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,6 +38,11 @@ public class UserService implements IUserService {
     @Override
     public UserEntity update(UserEntity user) {
         return userRepository.save(user);
+    }
+
+    @Override
+    public String encriptPassword(String password) {
+        return new BCryptPasswordEncoder().encode(password);
     }
 
 }

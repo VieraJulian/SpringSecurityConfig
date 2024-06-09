@@ -12,5 +12,5 @@ public interface IUserService {
     UserEntity save(UserEntity user);
     void deleteById(Long id);
     UserEntity update(UserEntity user);
-    //public String encriptPassword(String password);
+    String encriptPassword(String password);
 }
