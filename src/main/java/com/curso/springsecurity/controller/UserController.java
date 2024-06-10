@@ -6,6 +6,7 @@ import com.curso.springsecurity.service.IRoleService;
 import com.curso.springsecurity.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
@@ -24,11 +25,13 @@ public class UserController {
     private IRoleService roleService;
 
     @GetMapping
+    @PreAuthorize("permitAll()")
     public ResponseEntity<List<UserEntity>> getAllUsers() {
         return ResponseEntity.ok(userService.findAll());
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<UserEntity> getUserById(@PathVariable Long id) {
         Optional<UserEntity> user = userService.findById(id);
 

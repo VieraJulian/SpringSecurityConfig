@@ -4,6 +4,7 @@ import com.curso.springsecurity.model.Permission;
 import com.curso.springsecurity.repository.IPermissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class PermissionController {
     private IPermissionRepository permissionRepository;
 
     @GetMapping
+    @PreAuthorize("permitAll()")
     public ResponseEntity<List<Permission>> getAllPermissions(){
         List<Permission> permissions = permissionRepository.findAll();
 
@@ -24,6 +26,7 @@ public class PermissionController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<Permission> getPermissionsById(@PathVariable Long id){
         Optional<Permission> permission = permissionRepository.findById(id);
 

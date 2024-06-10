@@ -15,7 +15,7 @@ public class HelloWordController {
     }
 
     @GetMapping("/helloSecured")
-    @PreAuthorize("hasAuthority('READ')")
+    @PreAuthorize("hasRole('ADMIN')")
     public String helloSecured() {
         return "Hello World Secured";
     }
