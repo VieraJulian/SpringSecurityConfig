@@ -60,4 +60,13 @@ public class JwtUtils {
             throw new JWTVerificationException("Invalid token. Not authorized");
         }
     }
+
+    // Obtener el username
+    public String extractUsername(DecodedJWT decodedJWT) {
+        return decodedJWT.getSubject().toString();
+    }
+
+    // Obtener un claim
+
+    // Obtener todos los claims
 }
